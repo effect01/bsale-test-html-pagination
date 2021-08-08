@@ -30,7 +30,6 @@ utils.selectOne = async (query, res) => {
 // query with params
 utils.get_result_with_queries = async (table, { query }, res) => {
 
-	console.log(query)
     try{
     //  if where or order exits they need have a json. for example "_where={"category":1}" 
 	if ( IsAJsonString(query._where)) {
@@ -59,7 +58,9 @@ utils.get_result_with_queries = async (table, { query }, res) => {
 	res.json({ data: result });
 } catch (err) {
     console.error('something is wrong getting result with queries')
+	res.status(500).send({ err: err.message, mssg:"error getting result with queries"})
 }
+
 };
 
 module.exports = utils;

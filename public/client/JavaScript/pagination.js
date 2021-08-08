@@ -1,29 +1,26 @@
 const ulPagination = document.querySelector(
-	"#products-filter-container ul.pagination"
+	"#products-pagination-container ul.pagination"
 );
 const query = window.location.search;
 
 const getTotalProduct = async () => {
+	console.log(query)
 	const url = `${API_URL}/api/products/count${query}`;
-	return (await fetchData(url)).data.count;
+	const result = await fetchData(url)
+	console.log(result)
+	return result.data[0].count
 };
 // ceil expected example 40.2 => 41
 const parseIntThenDivide10 = (value) => Math.ceil(parseInt(value) / 10);
 
-const paginationConfig = async () => {
-	// VARS
+const NumbersToBeDisplay = (currentlyPage, paginationsLargeBothSize, totalProducts) =>{
+	try{
+	let paginationNumber = currentlyPage;
 	const numbers = [];
-	const paginationsLargeBothSize = 1; //  large left + 1 + large right
-	const params = Object.fromEntries(
-		new URLSearchParams(window.location.search).entries()
-	); // get all params as object
-	const totalProducts = parseIntThenDivide10(await getTotalProduct()); // every next 10 products is a 1 page if  we have 51 products then we count 6 pages
-	const currentlyPage = parseIntThenDivide10(params._start) + 1;
-    let paginationNumber = currentlyPage;
 	// we checked if in the next numbers  have the last page if is true, then subtract the difference to stay in a constant numbers
 	const dif = paginationNumber + paginationsLargeBothSize - totalProducts;
 	if (dif > 0) paginationNumber -= dif;
-
+console.log(currentlyPage, paginationsLargeBothSize, totalProducts)
 	console.log(paginationNumber, dif);
 	// set how many numbers we want to show in the pagination at left
 	paginationNumber -= paginationsLargeBothSize;
@@ -33,13 +30,42 @@ const paginationConfig = async () => {
 		if (paginationNumber <= 0) {
 			continue;
 		}
+		if(paginationNumber === (totalProducts+1) )	return numbers;
+
+		console.log(paginationNumber, totalProducts);
+		console.log(paginationNumber, (totalProducts+1) );
 		numbers.push(paginationNumber);
+		
+		
 		index++;
 	}
+	return numbers;
+}catch(e){
+	console.error(e);
+}
+
+
+}
+
+
+const paginationConfig = async () => {
+	// VARS
+	const paginationsLargeBothSize = 1; //  large left + 1 + large right
+	const params = Object.fromEntries(
+		new URLSearchParams(window.location.search).entries()
+	); 
+	
+	console.log(params)// get all params as object then we can use start to get currently page
+	const currentlyPage = parseIntThenDivide10(params._start) + 1;
+	console.log(currentlyPage)
+	const totalProducts = parseIntThenDivide10(await getTotalProduct()); // every next 10 products is a 1 page if  we have 51 products then we count 6 pages
+		console.log(totalProducts, await getTotalProduct());
+	// we calculate the numbers i wanna show it, with this the size of paginations numbers always is the same
+	const displayNumbers = NumbersToBeDisplay(currentlyPage , paginationsLargeBothSize, totalProducts);
 	return {
-		numbers: numbers,
-		IsLastButtonNecessary: numbers.slice(-1).pop() != totalProducts + 1,
-		IsFirstButtonNecessary: numbers.slice(0, 1).pop() !== 1,
+		numbers: displayNumbers,
+		IsLastButtonNecessary: displayNumbers.slice(-1).pop() != totalProducts ,
+		IsFirstButtonNecessary: displayNumbers.slice(0, 1).pop() !== 1,
         currentPage: currentlyPage,
         LastPagination: totalProducts-1
 	};
@@ -51,7 +77,7 @@ const addPaginationLink = (number,isCurrentPage ) => {
 	const a = document.createElement("a");
 	a.className = "page-link";
 	a.innerHTML = number;
-	a.setAttribute("href", `/productos?_start=${number-1}0&_limit=10`);
+	a.setAttribute("href", `/productos${query.replace(/_start=.*&/, `_start=${number-1}0&`) }`);
 	li.appendChild(a);
 	ulPagination.appendChild(li);
 };
@@ -69,7 +95,7 @@ const initPagination = async () => {
 			ulPagination.innerHTML += ` <li class="page-item"><a class="page-link" href="/productos?_start=${paginationSetting.LastPagination}0&_limit=10"">Final</a></li>`;
 
 	} catch {
-		console.error("ERROR TRYING TO ADDING PAGINATION");
+		console.error("ERROR TRYING at ADDING PAGINATION");
 	}
 };
 

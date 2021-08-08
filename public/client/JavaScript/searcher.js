@@ -11,7 +11,20 @@ const paintSurggerences = ({ data }) => {
         dropdownElement.className = 'dropdown-menu show w-100'
 	data.forEach((e) => {
 		dropdownElement.innerHTML += `<li>
-        <a class="dropdown-item" href="/producto/${e.id}">${e.name}</a>
+        <p class="" href="/producto/8" style="
+        position: absolute;
+        right: 0;
+        padding: 7px;
+        font-size: 12px;
+        /* background: #fffecc; */
+    ">   ${ new Intl.NumberFormat('CLP', {
+        style: 'currency',
+        currency: 'CLP',}).format(e.price) 
+    }</p>
+    
+        <a class="dropdown-item" href="/producto/${e.id}">${e.name}
+    
+</a>
         </li>
             `;
 
@@ -26,7 +39,7 @@ document
         console.log(e.target.value, e.target.value.length );
         // searcher need at least 2 characters to search  (  axios load anyway with new params if the user delete manualiy the prev input when axios is loading, thats is why we need to check the length without if )
 		// load suggerences
-        const url = `${URL}/api/products?_where={"name":"${e.target.value.length > 2 ? e.target.value:null}"}&_start=0&_limit=15`;
+        const url = `${URL}/api/products?_where={"name":"${e.target.value.length != 0 ? e.target.value:null}"}&_start=0&_limit=15`;
         paintSurggerences(await fetchData(url));
         }catch{
             console.error("error on searched input event");

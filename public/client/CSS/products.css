@@ -53,6 +53,29 @@
 
 }
 
-/* pagination */
+#products-filter-container{
+    padding: 18px;
+    width: 660px;
+}
+.filters{
+    display: flex;
+    justify-content: space-around;
 
+}
 
+/* phone / table view */
+@media (max-width: 997px){ 
+    #products-filter-container{
+        padding: 8px;
+        width: 100%;
+    }
+    .filters{
+        display: block;
+    }
+    .filters div, .filters input{
+        width: 100%;
+        
+        justify-content: center;
+        align-items: center; 
+    }
+}

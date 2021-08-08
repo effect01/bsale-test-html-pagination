@@ -73,16 +73,48 @@
 		<!-- body -->
 		<main>
 			<div class="">
-				<div id="products-filter-container">filters</div>
-				<div id="products-grid-container">       
-				<h4> LOADING .... </h4>	
-				</div>
 				<div id="products-filter-container">
-
+					<h5>filtrar</h5>
+                    <div class="filters">
+						<div>
+							<input id='filter-sercher'class="form-control" type="search" placeholder="Que buscas ?" aria-label="Search">
+						</div>
+                            <div>
+								<!-- categories selecter -->
+							
+								<select
+									id="categories"
+									class="form-select"
+									name="categories"
+									aria-label="Categorias"
+								>
+									<option value="">Selecciona una categoria</option>
+								</select>
+                            </div>
+                            <div>
+								<select
+								id="orderby"
+								class="form-select"
+								name="oderby"
+								aria-label="Categorias"
+							>
+								<option value="">Ordenar por</option>
+								<option value="name">Nombre</option>
+								<option value="price">Precio</option>
+							</select>
+                            </div>
+                            <div>
+                                <!-- butto -->
+                                <input value="Buscar" id='submit-button' type="submit" class="btn btn-primary">
+                            </div>
+                    </div>
+                </div>
+				<div id="products-grid-container">       
+				<h4> CARGANDO .... </h4>	
+				</div>
+				<div id="products-pagination-container">
                     <nav aria-label="Page navigation example">
                         <ul class="pagination justify-content-center">
-
-           
                         </ul>
                       </nav>
                 </div>
@@ -92,6 +124,7 @@
 			<div class="container"></div>
 		</footer>
 	</body>
+	<script src="client/javascript/filters.js"></script>
 	<script src="client/javascript/searcher.js"></script>
 	<script src="client/javascript/Products.js"></script>
     <script src="client/javascript/Pagination.js"></script>
