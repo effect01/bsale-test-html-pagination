@@ -1,0 +1,67 @@
+/* css color var */
+
+
+:root {
+    --brand-color: orange;
+  }
+  
+body{
+    margin: 160px;
+    margin-top: 40px;
+    margin-bottom: 0;
+}
+
+.navbar-bg{
+    background: #ffffff00;
+}
+
+nav.navbar.navbar-expand-lg.navbar-light  a.navbar-brand{
+    font-weight: 700;
+    color: var(--brand-color);
+    font-size: 30px;
+    font-family: cursive;
+}
+
+nav.navbar.navbar-expand-lg.navbar-light >  .container-fluid{
+    margin: 0!important;
+}
+div.collapse   [type="search"]{
+    width: 300px
+ }
+.dropdown{
+    width: 100%;
+}
+.dropdown .dropdown-menu{
+    overflow-y: auto;
+    max-height: 400px;
+}
+.dropdown .dropdown-menu .dropdown-item{
+    white-space: pre-wrap;
+    display: -webkit-box;
+    flex-direction: column;
+    align-content: flex-start;
+    flex-shrink: 0;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    margin: 0px;
+}
+/* phone / table view */
+@media (max-width: 997px){ 
+    body{
+        margin: 40px;
+        margin-top: 30px;
+        margin-bottom: 0;
+    }
+    div.collapse  form.d-flex.ms-4{
+        margin: 0;
+        margin-right: 0;
+        margin-left: 0!important;
+    }
+    div.collapse   [type="search"]{
+       width: 100%;
+       margin: 0;
+    }
+
+
+}

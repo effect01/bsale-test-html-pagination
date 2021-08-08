@@ -1,5 +1,5 @@
 let utils = {};
-const { MySqlquery } = require("../config/mysql");
+const { MySqlquery ,MySqlConnectionEnd } = require("../config/mysql");
 
 utils.selectAll = async (query, res) => {
 	try {
@@ -9,7 +9,9 @@ utils.selectAll = async (query, res) => {
 			res.status(500).send(err.message);
 		});
 		return result;
+
 	} catch (err) {
+		MySqlConnectionEnd()
 		res.status(500).send(err.message)
 	}
 };
@@ -23,6 +25,7 @@ utils.selectOne = async (query, res) => {
 		console.log(result);
 		return result[0];
 	} catch (err) {
+		MySqlConnectionEnd()
 		res.status(500).send(err.message)
 	}
 };
@@ -39,16 +42,14 @@ utils.get_result_with_queries = async (table, { query }, res) => {
             if (key == "name") {
                 return  key  + " LIKE '%" + JSON.parse(query._where)[key] + "%'";
             }
-			return key + " =" + "'" + JSON.parse(query._where)[key] + "'";
+			return key + " = " + "'" + JSON.parse(query._where)[key] + "'";
 		});
-        // join every "where" params with "AND". example : name = "value" AND other = "value"
+        // join every "where" params with "AND". example : name = "value" AND other = "value", to make a correct where query sintax
 		table = table + " where " + array_wheres.join(" AND ");
 	}
 	if (IsAJsonString(query._order)) {
-		// get all "order" params and add to old table query string to make a new one
-		const array_order_by = Object.keys(JSON.parse(query._order)).map((key) => {
-			return key + " " + JSON.parse(query._order)[key];
-		});
+		// get all "order" params and add to old table query string to make a new one with correct query sintax
+		const array_order_by = Object.keys(JSON.parse(query._order)).map((key) => key + " " + JSON.parse(query._order)[key]);
 		table = table + " order by " + array_order_by.join(" , ");
 	}
 	// if queries have _limit or _start  set then to query string, if is missing one of them then add default value
@@ -56,6 +57,7 @@ utils.get_result_with_queries = async (table, { query }, res) => {
 		table = table + ` LIMIT ${query._start ?? 0}, ${query._limit ?? 10}`;
 	}
 	console.log(table);
+	// call the dba
 	result = await utils.selectAll(table, res);
 	res.json({ data: result });
 } catch (err) {
