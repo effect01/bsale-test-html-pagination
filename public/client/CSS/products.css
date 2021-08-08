@@ -1,0 +1,54 @@
+#products-grid-container{
+    display: grid;
+    background: rgb(248, 248, 248);
+    border-radius: 30px;
+    min-height: 800px;
+    padding: 50px;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 270px));
+  
+    grid-auto-rows: 420px;
+    grid-gap: 20px;
+    justify-content: space-around;
+}
+.card {
+    border: rgba(172, 132, 1, 0.637) 1px solid ;
+}
+.card img{
+    height: 250px;
+}
+
+.card div.info-product-price{
+    display: flex;
+    flex-direction: column;
+    word-wrap: break-word;
+}
+.card div.info-product-price  div:nth-child(1){
+    font-size: 20px;
+}
+.card div.info-product-price  div:nth-child(2){
+    height: 25px;
+    font-size: 13px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.card div.info-product-price  div:nth-child(2) .product-percentage{
+    background-color: red;
+    font-weight: 600;
+    color: white;
+    padding: 3px;
+    border-radius: 6px;
+}
+
+.card .info-product-title a{
+    color: var(--brand-color);
+    text-decoration: none;
+}
+.btn-main{
+    background-color: var(--brand-color);
+    color: white;
+}
+.btn-check:focus+.btn, .btn:focus {
+    box-shadow: 0 0px  6px 4px rgba(0, 0, 0, 0.123);
+
+}

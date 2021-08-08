@@ -11,7 +11,6 @@ utils.selectAll = async (query, res) => {
 		return result;
 
 	} catch (err) {
-		MySqlConnectionEnd()
 		res.status(500).send(err.message)
 	}
 };
@@ -25,7 +24,6 @@ utils.selectOne = async (query, res) => {
 		console.log(result);
 		return result[0];
 	} catch (err) {
-		MySqlConnectionEnd()
 		res.status(500).send(err.message)
 	}
 };
@@ -34,6 +32,8 @@ utils.selectOne = async (query, res) => {
 
 // query with params
 utils.get_result_with_queries = async (table, { query }, res) => {
+
+	console.log(query)
     try{
     //  if where or order exits they need have a json. for example "_where={"category":1}" 
 	if ( IsAJsonString(query._where)) {
@@ -66,6 +66,8 @@ utils.get_result_with_queries = async (table, { query }, res) => {
 };
 
 module.exports = utils;
+
+
 const IsAJsonString = (str) => {
     try {
         JSON.parse(str);

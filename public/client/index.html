@@ -20,7 +20,9 @@
 		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 		<!-- charge my css -->
 		<link rel="stylesheet" href="client/CSS/index.css" />
-
+		<!-- charge my var -->
+		<script src="client/javascript/config.js"  ></script>
+		<script src="client/javascript/utils.js"  ></script>
 		<title>Bsale-test</title>
 	</head>
 	<body>
@@ -45,7 +47,7 @@
 							<a class="nav-link active" aria-current="page" href="/">Inicio</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="/productos">Productos</a>
+							<a class="nav-link" href="/productos?_start=0&_limit=10">Productos</a>
 						</li>
 						<form id='searcher' class="d-flex ms-4" >
                             <div class="dropdown">

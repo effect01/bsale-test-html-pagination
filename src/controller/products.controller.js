@@ -4,6 +4,7 @@ const utils = require("./utils");
 control.getDatas = async (req, res) => {
 	try {
 		const table = `SELECT * FROM product`;
+		console.log(req)
 		// if req have queryes then try to get results with the querys
 		if (Object.entries(req.query).length > 0) utils.get_result_with_queries(table, req, res);
 		if (Object.entries(req.query).length === 0) {
@@ -25,7 +26,12 @@ control.getData = async (req, res) => {
 control.getCountDatas = async (req, res) => {
 	try { 
 		const table = "select COUNT(id) as count from product";
-		res.json( await utils.selectOne(table, res)  );
+	
+		if (Object.entries(req.query).length > 0) utils.get_result_with_queries(table, req, res);
+		if (Object.entries(req.query).length === 0) {
+			
+			res.json({data:await utils.selectOne(table, res) });
+        }
 	} catch (e) {
 		res.status(500).send("find products error " + e);
 	}

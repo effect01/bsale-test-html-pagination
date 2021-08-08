@@ -5,10 +5,15 @@
     --brand-color: orange;
   }
   
-body{
+  
+main, nav{
     margin: 160px;
     margin-top: 40px;
     margin-bottom: 0;
+}
+main{
+    min-height: 500px;
+    padding-bottom: 30px;
 }
 
 .navbar-bg{
@@ -46,9 +51,17 @@ div.collapse   [type="search"]{
     overflow: hidden;
     margin: 0px;
 }
+
+footer{
+    min-height: 400px;
+    background-color: rgb(27, 27, 27);
+    width: 100%;
+    z-index: 999;
+    position: static;
+}
 /* phone / table view */
 @media (max-width: 997px){ 
-    body{
+    main, nav{
         margin: 40px;
         margin-top: 30px;
         margin-bottom: 0;

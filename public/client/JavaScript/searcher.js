@@ -1,8 +1,8 @@
-//
+
 
 const dropdownElement = document.querySelector("#searcher .dropdown .dropdown-menu");
-const URL = "http://localhost:2424";
-
+const URL =  API_URL ;
+console.log(URL);
 const paintSurggerences = ({ data }) => {
     dropdownElement.className = 'dropdown-menu w-100'
     dropdownElement.innerHTML = "";
@@ -22,17 +22,15 @@ const paintSurggerences = ({ data }) => {
 document
 	.querySelector('[type="search"]')
 	.addEventListener("input", async function (e) {
+        try{
         console.log(e.target.value, e.target.value.length );
-        // searcher need at least 2 characters to search  ( we dont use "if" because axios load anyway with new params if the user delete manualiy the prev input when axios is loading )
+        // searcher need at least 2 characters to search  (  axios load anyway with new params if the user delete manualiy the prev input when axios is loading, thats is why we need to check the length without if )
 		// load suggerences
-		const {data,status} = await axios
-			.get(`${URL}/api/products?_where={"name":"${e.target.value.length > 2 ? e.target.value:null}"}&_start=0&_limit=15`)
-			.catch((error) => {
-				console.log(error.message);
-			});
-		// is the response a success?
-		if (status !== 200)
-			console.error("searcher have unexpected status ");
-		if (status == 200)
-            paintSurggerences(data);
-	});
+        const url = `${URL}/api/products?_where={"name":"${e.target.value.length > 2 ? e.target.value:null}"}&_start=0&_limit=15`;
+        paintSurggerences(await fetchData(url));
+        }catch{
+            console.error("error on searched input event");
+        }
+	})
+    
+    ;
