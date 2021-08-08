@@ -4,32 +4,35 @@ const path = require('path')
 // set 
 const port = 2424;
 app.set('port', port)
+// set engine as ejs to be enable html in render
+app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html')
+
+app.use(express.static(path.join(__dirname, '../public/')));
+app.set('views', path.join(__dirname, '../public/client'));
 
 /// middleware
 app.use(express.json());
 
-/// static routes
-app.use(express.static( path.join( __dirname , '../public')) );
+/// view routes
 app.get('/', function(req, res) {
-    res.sendFile(path.join( __dirname , '../public/client/index.html'));
+  res.render('index.html');
   });
-
-app.get('/products', function(req, res) {
-    res.sendFile(path.join( __dirname , '../public/client/pages/product.html'));
+app.get('/productos', function(req, res) {
+    res.render('pages/products.html' );
   });
-app.get('/products/:id', function(req, res) {
-    res.sendFile(path.join( __dirname , '../public/client/pages/productDetail.html'));
+app.get('/producto/:id', function(req, res) {
+    res.render('pages/productDetail.html');
 });
   
-///  apis routes
+///  APIS routes
 app.use('/api/products', require('./routes/products.routes'));
 app.use('/api/categories', require('./routes/categories.routes'));
 
 // app 
 
   // catch 404 and forward to error handler
-  app.use(function(req, res, next) {
+app.use(function(req, res, next) {
     next(createError(404));
 });
   // error handler

@@ -2,10 +2,12 @@
 
 var express = require('express');
 var router = express.Router();
-const { getData , getDatas , getCountDatas } =  require('../controller/productos.controller');
+const { getData , getDatas , getCountDatas } =  require('../controller/products.controller');
 
 
 
+router.route("/count/")
+.get(getCountDatas)
 /* GET . */
 router.route("/")
 .get(getDatas)
@@ -13,12 +15,7 @@ router.route("/")
 router.route("/:id")
 .get(getData)
 
-router.route("/count")
-.get(getCountDatas)
 
-
-// router.route("/buscar/")
-// .get(SearchProductByName)
 
 module.exports = router;
 
