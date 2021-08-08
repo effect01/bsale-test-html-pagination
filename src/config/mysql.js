@@ -3,7 +3,7 @@ const {promisify} = require('util');
 require('dotenv').config()
 
 const config = {
-	host: process.env.API_URL,
+	host: process.env.MYSQL_HOST_URL,
 	user: "bsale_test",
 	password: "bsale_test",
 	database: "bsale_test",

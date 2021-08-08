@@ -25,7 +25,16 @@ control.getData = async (req, res) => {
 control.getCountDatas = async (req, res) => {
 	try { 
 		const table = "select COUNT(id) as count from category";
-		res.json( await utils.selectOne(table, res)  );
+		if (Object.entries(req.query).length > 0){
+			// in this case we need to know all result without limit and start params, so we deleted 
+			delete req.query._limit;
+			delete req.query._start;
+			 utils.get_result_with_queries(table, req, res);
+			}
+		if (Object.entries(req.query).length === 0) {
+			
+			res.json({data:await utils.selectOne(table, res) });
+        }
 	} catch (e) {
 		res.status(500).send("find categories error " + e);
 	}

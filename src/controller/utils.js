@@ -4,14 +4,11 @@ const { MySqlquery ,MySqlConnectionEnd } = require("../config/mysql");
 utils.selectAll = async (query, res) => {
 	try {
 		// call the dba
-		const result = await MySqlquery(query).catch((err) => {
-			console.error(err);
-			res.status(500).send(err.message);
-		});
+		const result = await MySqlquery(query)
 		return result;
 
 	} catch (err) {
-		res.status(500).send(err.message)
+		res.status(500).send({ err: err.message, mssg:"error select all product"})
 	}
 };
 utils.selectOne = async (query, res) => {
@@ -21,10 +18,10 @@ utils.selectOne = async (query, res) => {
 			console.log(err);
 			res.status(500).send(err.message);
 		});
-		console.log(result);
 		return result[0];
 	} catch (err) {
-		res.status(500).send(err.message)
+		res.status(500).send({ err: err.message, mssg:"error select one product"})
+	
 	}
 };
 
