@@ -26,11 +26,8 @@ const filter = async () => {
     const categorieString =(value) => `${value ? `&_where={"category":"${value}"}`:''}`
     const searchString = (value) => `${value ? `&_where={"name":"${value}"}`:''}`
     // join it 
-
-    
     const queries = `/productos?${searchString(searcherValue)+orderString(orderBySelecterValue)+categorieString(categorieSelectedValue)}&_start=0&_limit=10`
-    console.log(orderBySelecterValue ?? "true",  queries)
-   
+
      window.location.assign(API_URL+queries); 
   
 })

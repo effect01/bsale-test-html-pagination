@@ -51,7 +51,16 @@ div.collapse   [type="search"]{
     overflow: hidden;
     margin: 0px;
 }
-
+.container{
+    justify-content: center;
+    align-items: center;
+}
+#firm{
+    display: block;
+    padding: 40px;
+    color: white;
+    text-align: center;
+}
 footer{
     min-height: 400px;
     background-color: rgb(27, 27, 27);

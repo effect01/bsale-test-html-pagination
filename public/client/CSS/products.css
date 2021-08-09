@@ -55,12 +55,32 @@
 
 #products-filter-container{
     padding: 18px;
-    width: 660px;
+    width: 683px;
 }
 .filters{
     display: flex;
     justify-content: space-around;
 
+}
+.btn-primary{
+    background-color: var(--brand-color);
+    color: white;
+    border-color: rgba(0, 0, 0, 0);
+
+}
+
+
+.btn-primary:hover{
+    background-color: var(--brand-color);
+    border-radius: 0 0 2px 2px black;
+    border-color: rgba(0, 0, 0, 0);
+    box-shadow: none;
+}
+.page-item.active .page-link {
+    z-index: 3;
+    color: #fff;
+    background-color:  var(--brand-color);;
+    border-color: var(--brand-color);;
 }
 
 /* phone / table view */

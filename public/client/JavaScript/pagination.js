@@ -20,7 +20,6 @@ const NumbersToBeDisplay = (currentlyPage, paginationsLargeBothSize, totalProduc
 	// we checked if in the next numbers  have the last page if is true, then subtract the difference to stay in a constant numbers
 	const dif = paginationNumber + paginationsLargeBothSize - totalProducts;
 	if (dif > 0) paginationNumber -= dif;
-console.log(currentlyPage, paginationsLargeBothSize, totalProducts)
 	console.log(paginationNumber, dif);
 	// set how many numbers we want to show in the pagination at left
 	paginationNumber -= paginationsLargeBothSize;
@@ -31,12 +30,7 @@ console.log(currentlyPage, paginationsLargeBothSize, totalProducts)
 			continue;
 		}
 		if(paginationNumber === (totalProducts+1) )	return numbers;
-
-		console.log(paginationNumber, totalProducts);
-		console.log(paginationNumber, (totalProducts+1) );
 		numbers.push(paginationNumber);
-		
-		
 		index++;
 	}
 	return numbers;
