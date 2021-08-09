@@ -1,5 +1,5 @@
 
 
-var API_URL = 'http://localhost:2424' // URL to the API
+var API_URL =  document.location.origin || "localhost:3000" // URL to the API
 
 

@@ -29,7 +29,7 @@ const NumbersToBeDisplay = (currentlyPage, paginationsLargeBothSize, totalProduc
 		if (paginationNumber <= 0) {
 			continue;
 		}
-		// if the number is bigger than the total products then break the loop
+		// break the loop in the extra number we dont wanna show it when we have the last page 
 		if(paginationNumber === (totalProducts+1) )	return numbers;
 		numbers.push(paginationNumber);
 		index++;

@@ -2,8 +2,8 @@ const express = require('express')
 const app = express();
 const path = require('path')
 // set 
-const port = 2424;
-app.set('port', port)
+const port = process.env.PORT || 3000;
+app.set('port',port )
 // set engine as ejs to be enable html in render
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html')
@@ -19,7 +19,7 @@ app.get('/', function(req, res) {
   res.render('index.html');
   });
 app.get('/productos', function(req, res) {
-    res.render('pages/products.html' );
+    res.render('Pages/products.html' );
   });
 app.get('/producto/:id', function(req, res) {
     res.render('pages/productDetail.html');

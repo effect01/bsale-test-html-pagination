@@ -1,5 +1,5 @@
 // load categories
-const categories_api = 'http://localhost:2424/api/categories'
+const categories_api = API_URL + '/api/categories'
 // Elements
 const categories_selector = document.getElementById('categories');
 const orderby_selector = document.getElementById('orderby');
