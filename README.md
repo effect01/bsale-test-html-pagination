@@ -6,8 +6,12 @@
 <p align="center">
    📄 🚀
 </p>
+<div>
 
 
+this is a small project based in a search product with a simple UI with JS vanilla connect it to API REST dev with NodeJS backend.
+
+![alt text](https://res.cloudinary.com/javier1/image/upload/v1628472639/Screenshot_3_xjqjb4.jpg)
 ## What’s In This Document
 
 - [Requirement](#-requirement)
