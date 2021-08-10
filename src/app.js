@@ -2,7 +2,7 @@ const express = require('express')
 const app = express();
 const path = require('path')
 // set 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 2424;
 app.set('port',port )
 // set engine as ejs to be enable html in render
 app.engine('html', require('ejs').renderFile);
@@ -22,7 +22,7 @@ app.get('/productos', function(req, res) {
     res.render('Pages/products.html' );
   });
 app.get('/producto/:id', function(req, res) {
-    res.render('pages/productDetail.html');
+    res.render('Pages/productDetail.html');
 });
   
 ///  APIS routes
