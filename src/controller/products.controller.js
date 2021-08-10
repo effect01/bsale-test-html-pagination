@@ -6,7 +6,7 @@ control.getDatas = async (req, res) => {
 		const table = `SELECT * FROM product`;
 		// if req have queryes then try to get results with the querys
 		if (Object.entries(req.query).length > 0)
-			utils.get_result_with_queries(table, req, res);
+		res.json({ data: await utils.get_result_with_queries(table, req, res)});
 		if (Object.entries(req.query).length === 0) {
 			result = await utils.selectAll(table, res);
 			res.json({ data: result });
@@ -31,8 +31,8 @@ control.getCountDatas = async (req, res) => {
 		delete queries._limit;
 		delete queries._start;
 		if (Object.entries(queries).length > 0) {
-			utils.get_result_with_queries(table, {query:{...queries} }, res);
-			return;
+			res.json({ data: await utils.get_result_with_queries(table, {query:{...queries} }, res)});
+			
 		}
 
 		if (Object.entries(queries).length === 0) {

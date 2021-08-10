@@ -28,7 +28,7 @@ const filter = async () => {
 
     // join it 
     const queries = `/productos?${categorieSearchString(categorieSelectedValue,searcherValue)+orderString(orderBySelecterValue)}&_start=0&_limit=10`;
-        console.log(queries)
+    console.log(queries)
      window.location.assign(API_URL+queries); 
   
 })

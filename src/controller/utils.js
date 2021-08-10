@@ -55,7 +55,7 @@ utils.get_result_with_queries = async (table, { query }, res) => {
 	console.log(table);
 	// call the dba
 	result = await utils.selectAll(table, res);
-	res.json({ data: result });
+	return result;
 } catch (err) {
     console.error('something is wrong getting result with queries')
 	res.status(500).send({ err: err.message, mssg:"error getting result with queries"})
