@@ -23,11 +23,12 @@ const filter = async () => {
 
     // Stringtify queries
     const orderString =(value) => `${value ? `&_order={"${value}":"ASC"}`:''}`
-    const categorieString =(value) => `${value ? `&_where={"category":"${value}"}`:''}`
-    const searchString = (value) => `${value ? `&_where={"name":"${value}"}`:''}`
-    // join it 
-    const queries = `/productos?${searchString(searcherValue)+orderString(orderBySelecterValue)+categorieString(categorieSelectedValue)}&_start=0&_limit=10`
+    const categorieSearchString =(categoryVal, searchVal) => categoryVal || searchVal ? `&_where={${ categoryVal ? (`"category":"${categoryVal}" `): ''}${categoryVal && searchVal ? ' , ':'' }${ searchVal ? (`"name":"${searchVal}"`): ''}}`
+    : '';
 
+    // join it 
+    const queries = `/productos?${categorieSearchString(categorieSelectedValue,searcherValue)+orderString(orderBySelecterValue)}&_start=0&_limit=10`;
+        console.log(queries)
      window.location.assign(API_URL+queries); 
   
 })
